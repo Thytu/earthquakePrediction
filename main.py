@@ -2,7 +2,7 @@
 # resultats incoherents car mauvais optimizer (SGD à la place d'Adam)
 # comment checker l'accuracy ? -> ecart moyen
 # issue dans la shape
-import rnn
+import models
 import utils
 import torch
 import torch.nn as nn
@@ -12,7 +12,7 @@ dataset, labels = utils.load_dataset("./dataset.csv")
 dataset, labels = utils.create_seq(dataset, labels, utils.SEQU_SIZE)
 X_train, y_train, X_test, y_test = utils.split(dataset, labels, 0.5)
 
-rnn = rnn.RNN(1, 50, 1)
+rnn = models.RNN(1, 50, 1)
 
 criterion = nn.MSELoss()
 learning_rate = 0.001
