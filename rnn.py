@@ -8,7 +8,7 @@ class RNN(nn.Module):
         self.hidden_size = hidden_size
         self.i2h = nn.Linear(intput_size + hidden_size, hidden_size)
         self.i2o = nn.Linear(intput_size + hidden_size, output_size)
-        self.softmax = nn.LogSoftmax(dim=1)
+        self.relu = nn.ReLU()
 
     def forward(self, input_tensor, hidden_tensor):
         combined = torch.cat((input_tensor, hidden_tensor), dim=1)
@@ -16,7 +16,7 @@ class RNN(nn.Module):
         hidden = self.i2h(combined)
         output = self.i2o(combined)
 
-        output = self.softmax(output)
+        output = self.relu(output)
         return output, hidden
 
     def init_hidden(self):
