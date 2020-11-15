@@ -1,8 +1,3 @@
-# diminution de la dataset car trop grande et pass suffisament de RAM
-# change softmax to relu
-# resultats incoherents car mauvais optimizer (SGD à la place d'Adam)
-# comment checker l'accuracy ? -> ecart moyen
-# issue dans la shape
 import models
 import utils
 import torch
@@ -26,7 +21,7 @@ def train(t, label):
     hidden = rnn.init_hidden()
 
     for i in range(t.size()[0]):
-        output, hidden = rnn(t[i], hidden) # TODO: fix dataset shape
+        output, hidden = rnn(t[i], hidden)
 
     optimizer.zero_grad()
     loss = criterion(output, label)
@@ -39,7 +34,7 @@ def test(t, label):
     hidden = rnn.init_hidden()
     with torch.no_grad():
         for i in range(t.size()[0]):
-            output, hidden = rnn(t[i], hidden) # TODO: fix dataset shape
+            output, hidden = rnn(t[i], hidden)
 
         loss = criterion(output, label)
 
